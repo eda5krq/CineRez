@@ -1,3 +1,27 @@
+<?php
+// Initialize a variable to track status
+$registrationSuccess = false;
+$error = '';
+
+// Check if the form was submitted via POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // 1. Collect the data from the $_POST superglobal
+    $fullName = $_POST['full_name'];
+    $email    = $_POST['email'];
+    $phone    = $_POST['phone'];
+    $pass     = $_POST['password'];
+    $confirm  = $_POST['confirm_password'];
+
+    // 2. Simple Validation
+    if ($pass !== $confirm) {
+        $error = "Passwords do not match!";
+    } else {
+        // 3. This is where you'd normally "Save" the data.
+        // For now, we'll just simulate a successful registration.
+        $registrationSuccess = true;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +43,27 @@
 </header>
 <main class="container">
     <section class="glass auth-card">
-        <h1>Create Account</h1>
+    <h1>Create Account</h1>
+
+    <?php if ($registrationSuccess): ?>
+        <div class="alert success">
+            <p><strong>Success!</strong> Account created for <?php echo htmlspecialchars($fullName); ?>.</p>
+            <p><a href="login.php">Click here to login.</a></p>
+        </div>
+    <?php elseif ($error): ?>
+        <div class="alert error">
+            <p style="color: #ff4d4d;"><?php echo $error; ?></p>
+        </div>
+    <?php else: ?>
         <p>Register to reserve faster and track your bookings.</p>
-        <form method="post" action="#" class="stack-form" data-static-demo="true">
-            <label>Full Name</label><input type="text" name="full_name" required>
-            <label>Email</label><input type="email" name="email" required>
-            <label>Phone Number</label><input type="tel" name="phone" required>
-            <label>Password</label><input type="password" name="password" required>
-            <label>Confirm Password</label><input type="password" name="confirm_password" required>
+    <?php endif; ?>
+
+    <?php if (!$registrationSuccess): ?>
+        <form method="post" action="register.php" class="stack-form">
             <button class="btn btn-primary" type="submit">Register</button>
         </form>
-        <p class="small-muted">Already have an account? <a href="login.php">Login here</a>.</p>
-    </section>
+    <?php endif; ?>
+</section>
 </main>
 <footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
 </body>
