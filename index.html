@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | CineRez</title>
+    <link rel="stylesheet" href="css/style.css">
+    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<div class="background-overlay"></div>
+
+<header class="site-header glass">
+    <div class="container nav-wrap">
+        <a class="logo" href="index.html" aria-label="CineRez home">
+            <img src="images/cinerez-logo.svg" alt="CineRez logo">
+            <span>CineRez</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
+        <nav id="mainNav">
+            <a class="active" href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+            <a href="profile.html">Profile</a>
+            <a href="admin.html">Admin</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero glass">
+        <div class="hero-content">
+            <p class="eyebrow">Cinema Ticket Reservation</p>
+            <h1>Book Your Cinema Experience with CineRez</h1>
+            <p>Choose a movie, pick your seats, and reserve your ticket online.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="movies.html">Browse Movies</a>
+                <a class="btn btn-secondary" href="movies.html">Book Now</a>
+            </div>
+            <p class="small-muted">Preferred cinema: Prishtina</p>
+        </div>
+        <div class="hero-glow"></div>
+    </section>
+
+    <section>
+        <div class="section-head">
+            <h2>Featured Movies</h2>
+            <a href="movies.html">See all</a>
+        </div>
+        <div class="movie-grid">
+            <article class="movie-card glass">
+                <div class="poster-placeholder"><img src="images/movie1.jpg" alt="The Super Mario Galaxy Movie poster"></div>
+                <h3>The Super Mario Galaxy Movie</h3>
+                <p>Animation | 98 min</p>
+                <p class="rating">Rating: 7.1 | PG</p>
+                <p class="price">EUR 6.00</p>
+                <div class="card-actions">
+                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                </div>
+            </article>
+            <article class="movie-card glass">
+                <div class="poster-placeholder"><img src="images/movie2.jpg" alt="Project Hail Mary poster"></div>
+                <h3>Project Hail Mary</h3>
+                <p>Sci-Fi | 156 min</p>
+                <p class="rating">Rating: 8.0 | PG-13</p>
+                <p class="price">EUR 6.00</p>
+                <div class="card-actions">
+                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                </div>
+            </article>
+            <article class="movie-card glass">
+                <div class="poster-placeholder"><img src="images/movie6.jpg" alt="Hoppers poster"></div>
+                <h3>Hoppers</h3>
+                <p>Animation | 104 min</p>
+                <p class="rating">Rating: 7.3 | PG</p>
+                <p class="price">EUR 6.50</p>
+                <div class="card-actions">
+                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="glass how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div><span>1</span><p>Choose movie</p></div>
+            <div><span>2</span><p>Select date and time</p></div>
+            <div><span>3</span><p>Pick seats</p></div>
+            <div><span>4</span><p>Confirm reservation</p></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-head"><h2>Now Showing</h2></div>
+        <div class="ticker">
+            <span>The Super Mario Galaxy Movie</span>
+            <span>Project Hail Mary</span>
+            <span>Lee Cronin's The Mummy</span>
+            <span>The Drama</span>
+            <span>You, Me &amp; Tuscany</span>
+            <span>Hoppers</span>
+            <span>Reminders of Him</span>
+            <span>A Great Awakening</span>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>&copy; 2026 CineRez. All rights reserved.</p>
+        <p>Frontend-only static demo version.</p>
+    </div>
+</footer>
+</body>
+</html>
