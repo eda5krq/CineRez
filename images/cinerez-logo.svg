@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">CineRez Logo</title>
+  <desc id="desc">A cinematic monogram with a film reel and play icon.</desc>
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2e88"/>
+      <stop offset="55%" stop-color="#9c4dff"/>
+      <stop offset="100%" stop-color="#27d7ff"/>
+    </linearGradient>
+    <linearGradient id="play" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ddd7ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="240" height="240" rx="56" fill="#12002f"/>
+  <circle cx="120" cy="120" r="88" fill="none" stroke="url(#ring)" stroke-width="18"/>
+  <circle cx="120" cy="120" r="60" fill="#1a103f" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+  <polygon points="108,92 108,148 154,120" fill="url(#play)"/>
+  <circle cx="70" cy="70" r="10" fill="#ffffff" fill-opacity="0.75"/>
+  <circle cx="170" cy="70" r="10" fill="#ffffff" fill-opacity="0.75"/>
+  <circle cx="70" cy="170" r="10" fill="#ffffff" fill-opacity="0.75"/>
+  <circle cx="170" cy="170" r="10" fill="#ffffff" fill-opacity="0.75"/>
+</svg>
