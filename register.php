@@ -1,23 +1,24 @@
 <?php
-// Initialize a variable to track status
+// 1. Initialize variables so they exist even if the form isn't sent
 $registrationSuccess = false;
 $error = '';
+$fullName = ''; 
 
-// Check if the form was submitted via POST
+// 2. ONLY run this code if the Request Method is POST (the user clicked submit)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. Collect the data from the $_POST superglobal
+    
+    // Now these keys will exist because the form was sent!
     $fullName = $_POST['full_name'];
     $email    = $_POST['email'];
     $phone    = $_POST['phone'];
     $pass     = $_POST['password'];
     $confirm  = $_POST['confirm_password'];
 
-    // 2. Simple Validation
+    // 3. Simple Validation
     if ($pass !== $confirm) {
         $error = "Passwords do not match!";
     } else {
-        // 3. This is where you'd normally "Save" the data.
-        // For now, we'll just simulate a successful registration.
+        // Success logic goes here
         $registrationSuccess = true;
     }
 }
