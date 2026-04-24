@@ -12,17 +12,9 @@
 <div class="background-overlay"></div>
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a href="index.html">Home</a>
-            <a class="active" href="movies.html">Movies</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a href="profile.html">Profile</a>
-            <a href="admin.html">Admin</a>
-            <a href="login.html">Logout</a>
-        </nav>
+        <?php include 'nav.php'; ?>
     </div>
 </header>
 <main class="container">
@@ -46,7 +38,7 @@
                 <h3>Showtimes</h3>
                 <span>16:00</span><span>18:30</span><span>21:00</span>
             </div>
-            <a class="btn btn-primary" href="booking.html">Reserve Tickets</a>
+            <a class="btn btn-primary" href="booking.php">Reserve Tickets</a>
         </div>
     </section>
 </main>

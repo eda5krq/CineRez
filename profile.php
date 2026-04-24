@@ -1,3 +1,9 @@
+<?php
+include 'includes/auth.php';
+requireLogin(); // Ensure the user is logged in
+
+// If logged in, load the profile UI:
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,30 +18,27 @@
 <div class="background-overlay"></div>
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <a class="logo" href="index.php">
+            <img src="images/cinerez-logo.svg" alt="CineRez logo">
+            <span>CineRez</span>
+        </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a class="active" href="profile.html">Profile</a>
-            <a href="admin.html">Admin</a>
-            <a href="login.html">Logout</a>
-        </nav>
+        <?php include 'nav.php'; ?>
+    </div>
+</header>
+</div>
     </div>
 </header>
 <main class="container">
     <section class="glass page-head">
         <h1>Profile</h1>
-        <p>Welcome back, Demo User. You can browse movies and reserve tickets.</p>
+        <p>Welcome back, <?php echo htmlspecialchars($_SESSION["username"]); ?>. You can browse movies and reserve tickets.</p>
     </section>
     <section class="profile-grid">
         <article class="glass">
             <h2>Account</h2>
-            <p><strong>Name:</strong> Demo User</p>
-            <p><strong>Email:</strong> user@cinerez.com</p>
-            <p><strong>Role:</strong> User</p>
+            <p><strong>Name:</strong> <?php echo htmlspecialchars($_SESSION["username"]); ?></p>
+            <p><strong>Role:</strong> <?php echo htmlspecialchars(ucfirst($_SESSION["role"])); ?></p>
         </article>
         <article class="glass">
             <h2>Preferences</h2>

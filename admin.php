@@ -1,3 +1,7 @@
+<?php
+include 'includes/auth.php';
+requireRole("admin");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,17 +16,9 @@
 <div class="background-overlay"></div>
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a href="profile.html">Profile</a>
-            <a class="active" href="admin.html">Admin</a>
-            <a href="login.html">Logout</a>
-        </nav>
+       <?php include 'nav.php'; ?>
     </div>
 </header>
 <main class="container">
@@ -55,3 +51,4 @@
 <footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
 </body>
 </html>
+

@@ -14,15 +14,7 @@
     <div class="container nav-wrap">
         <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a class="active" href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a href="profile.html">Profile</a>
-            <a href="admin.html">Admin</a>
-            <a href="login.html">Logout</a>
-        </nav>
+        <?php include 'nav.php'; ?>
     </div>
 </header>
 <main class="container">
