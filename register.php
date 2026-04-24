@@ -12,16 +12,9 @@
 <div class="background-overlay"></div>
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html">Login</a>
-            <a class="active" href="register.html">Register</a>
-        </nav>
+        <?php include 'nav.php'; ?>
     </div>
 </header>
 <main class="container">
@@ -36,7 +29,7 @@
             <label>Confirm Password</label><input type="password" name="confirm_password" required>
             <button class="btn btn-primary" type="submit">Register</button>
         </form>
-        <p class="small-muted">Already have an account? <a href="login.html">Login here</a>.</p>
+        <p class="small-muted">Already have an account? <a href="login.php">Login here</a>.</p>
     </section>
 </main>
 <footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies | CineRez</title>
+    <link rel="stylesheet" href="css/style.css">
+    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<div class="background-overlay"></div>
+<header class="site-header glass">
+    <div class="container nav-wrap">
+        <a class="logo" href="index.php" aria-label="CineRez home">
+            <img src="images/cinerez-logo.svg" alt="CineRez logo">
+            <span>CineRez</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
+        <?php include 'nav.php'; ?>
+    </div>
+</header>
+
+<main class="container">
+    <section class="glass page-head">
+        <h1>Movies</h1>
+        <p>Find your next movie night and reserve in minutes.</p>
+    </section>
+
+    <section class="glass filters">
+        <form method="get" action="#" class="filter-form" data-static-demo="true">
+            <input type="text" name="search" placeholder="Search by title..." value="">
+            <select name="genre">
+                <option value="">All Genres</option>
+                <option>Animation</option>
+                <option>Drama</option>
+                <option>Horror</option>
+                <option>Romance</option>
+                <option>Sci-Fi</option>
+            </select>
+            <select name="sort">
+                <option value="">Sort</option>
+                <option>Title A-Z</option>
+                <option>Top Rating</option>
+                <option>Lowest Price</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Apply</button>
+            <a class="btn btn-outline" href="movies.php">Reset</a>
+        </form>
+    </section>
+
+    <section>
+        <div class="movie-grid">
+            <article class="movie-card glass"><div class="poster-placeholder"><img src="images/movie1.jpg" alt="Poster"></div><h3>The Super Mario Galaxy Movie</h3><p>Animation | 98 min</p><p class="rating">Rating: 7.1 | PG</p><p class="price">EUR 6.00</p><div class="card-actions"><a class="btn btn-sm" href="movie-details.php">View Details</a><a class="btn btn-sm btn-outline" href="booking.php">Book</a></div></article>
+            <article class="movie-card glass"><div class="poster-placeholder"><img src="images/movie2.jpg" alt="Poster"></div><h3>Project Hail Mary</h3><p>Sci-Fi | 156 min</p><p class="rating">Rating: 8.0 | PG-13</p><p class="price">EUR 6.00</p><div class="card-actions"><a class="btn btn-sm" href="movie-details.php">View Details</a><a class="btn btn-sm btn-outline" href="booking.php">Book</a></div></article>
+            <article class="movie-card glass"><div class="poster-placeholder"><img src="images/movie3.jpg" alt="Poster"></div><h3>Lee Cronin's The Mummy</h3><p>Horror | 134 min</p><p class="rating">Rating: 6.3 | R</p><p class="price">EUR 5.50</p><div class="card-actions"><a class="btn btn-sm" href="movie-details.php">View Details</a><a class="btn btn-sm btn-outline" href="booking.php">Book</a></div></article>
+            <article class="movie-card glass"><div class="poster-placeholder"><img src="images/movie4.jpg" alt="Poster"></div><h3>The Drama</h3><p>Drama | 105 min</p><p class="rating">Rating: 6.8 | R</p><p class="price">EUR 5.50</p><div class="card-actions"><a class="btn btn-sm" href="movie-details.php">View Details</a><a class="btn btn-sm btn-outline" href="booking.php">Book</a></div></article>
+            <article class="movie-card glass"><div class="poster-placeholder"><img src="images/movie5.jpg" alt="Poster"></div><h3>You, Me &amp; Tuscany</h3><p>Romance | 105 min</p><p class="rating">Rating: 6.4 | PG-13</p><p class="price">EUR 4.00</p><div class="card-actions"><a class="btn btn-sm" href("movie-details.php">View Details</a><a class="btn btn-sm btn-outline" href("booking.php">Book</a></div></article>
+            <article class("movie-card glass"><div class("poster-placeholder"><img src("images/movie6.jpg" alt("Poster"></div><h3>Hoppers</h3><p>Animation | 104 min</p><p class("rating">Rating: 7.3 | PG</p><p class("price">EUR 6.50</p><div class("card-actions"><a class("btn btn-sm" href("movie-details.php">View Details</a><a class("btn btn-sm btn-outline" href("booking.php">Book</a></div></article>
+            <article class("movie-card glass"><div class("poster-placeholder"><img src("images/movie7.jpg" alt("Poster"></div><h3>Reminders of Him</h3><p>Drama | 114 min</p><p class("rating">Rating: 6.6 | PG-13</p><p class("price">EUR 5.00</p><div class("card-actions"><a class("btn btn-sm" href("movie-details.php">View Details</a><a class("btn btn-sm btn-outline" href("booking.php">Book</a></div></article>
+            <article class("movie-card glass"><div class("poster-placeholder"><img src("images/movie8.jpg" alt("Poster"></div><h3>A Great Awakening</h3><p>Drama | 129 min</p><p class("rating">Rating: 7.0 | PG-13</p><p class("price">EUR 4.50</p><div	class("card-actions"><a	class("btn btn-sm" href	class("movie-details.php">View Details</a><a	class("btn btn-sm btn-outline" href	class("booking.php">Book</a></div></article>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
+</body>
+</html>

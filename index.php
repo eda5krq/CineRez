@@ -13,17 +13,12 @@
 
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html" aria-label="CineRez home">
+        <a class="logo" href="index.php" aria-label="CineRez home">
             <img src="images/cinerez-logo.svg" alt="CineRez logo">
             <span>CineRez</span>
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-    <a href="index.html">Home</a>
-    <a href="movies.html">Movies</a>
-    <a href="booking.php">Booking</a> <a href="contact.html">Contact</a>
-    <a href="login.php">Login</a> <a href="admin.php">Admin</a> </nav>
-    </div>
+       <?php include 'nav.php'; ?>
 </header>
 
 <main class="container">
@@ -33,7 +28,7 @@
             <h1>Book Your Cinema Experience with CineRez</h1>
             <p>Choose a movie, pick your seats, and reserve your ticket online.</p>
             <div class="hero-actions">
-                <a class="btn btn-primary" href="movies.html">Browse Movies</a>
+                <a class="btn btn-primary" href="movies.php">Browse Movies</a>
                 <a class="btn btn-secondary" href="movies.html">Book Now</a>
             </div>
             <p class="small-muted">Preferred cinema: Prishtina</p>
