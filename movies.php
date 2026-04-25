@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/Classes/Movie.php';
+require_once __DIR__ . '/includes/functions.php';
 
 $movies = [
     [
@@ -66,15 +67,7 @@ if ($sort === "title") {
     });
 }
 
-function cleanText($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, "UTF-8");
-}
 
-function formatPrice($price)
-{
-    return "EUR " . number_format($price, 2);
-}
 
 $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
 ?>
@@ -123,7 +116,7 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
                     type="search"
                     name="search"
                     placeholder="Search by movie title..."
-                    value="<?php echo cleanText($search); ?>"
+                    value="<?php echo sanitizeInput($search); ?>"
                 />
 
                 <div class="filter-buttons">
@@ -132,9 +125,9 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
                             class="filter-btn <?php echo $genre === $genreOption ? 'active' : ''; ?>"
                             type="submit"
                             name="genre"
-                            value="<?php echo cleanText($genreOption); ?>"
+                            value="<?php echo sanitizeInput($genreOption); ?>"
                         >
-                            <?php echo cleanText($genreOption); ?>
+                            <?php echo sanitizeInput($genreOption); ?>
                         </button>
                     <?php endforeach; ?>
                 </div>
@@ -164,23 +157,23 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
                         <article class="movie-card">
                             <div class="poster-placeholder">
                                 <img
-                                    src="images/<?php echo cleanText($poster); ?>"
-                                    alt="<?php echo cleanText($movie->getTitle()); ?> poster"
+                                    src="images/<?php echo sanitizeInput($poster); ?>"
+                                    alt="<?php echo sanitizeInput($movie->getTitle()); ?> poster"
                                 />
                             </div>
 
-                            <h3><?php echo cleanText($movie->getTitle()); ?></h3>
+                            <h3><?php echo sanitizeInput($movie->getTitle()); ?></h3>
 
                             <p>
-                                <?php echo cleanText($movie->getGenre()); ?>
+                                <?php echo sanitizeInput($movie->getGenre()); ?>
                                 |
                                 <?php echo (int) $movie->getDuration(); ?> min
                             </p>
 
                             <p class="rating">
-                                Rating: <?php echo cleanText($movie->getRating()); ?>
+                                Rating: <?php echo sanitizeInput($movie->getRating()); ?>
                                 |
-                                <?php echo cleanText($ageRating); ?>
+                                <?php echo sanitizeInput($ageRating); ?>
                             </p>
 
                             <p class="price">
@@ -188,7 +181,7 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
                             </p>
 
                             <p class="small-note">
-                                <?php echo cleanText($movie->getShortInfo()); ?>
+                                <?php echo sanitizeInput($movie->getShortInfo()); ?>
                             </p>
 
                             <div class="card-actions">
