@@ -45,44 +45,43 @@ $_COOKIE['last_movie_id'] = (string)$movieId;
     <main class="container">
         <section class="movie-details glass">
             <div class="details-poster poster-placeholder large">
-    <img 
-        src="images/<?php echo sanitizeInput($movie['poster']); ?>" 
-        alt="<?php echo sanitizeInput($movie['title']); ?> poster"
-    >
-</div>
+                <img
+                    src="images/<?php echo sanitizeInput($movie['poster']); ?>"
+                    alt="<?php echo sanitizeInput($movie['title']); ?> poster">
+            </div>
 
-<div class="details-content">
-    <h1><?php echo sanitizeInput($movie['title']); ?></h1>
+            <div class="details-content">
+                <h1><?php echo sanitizeInput($movie['title']); ?></h1>
 
-    <p class="small-muted">
-        <?php echo sanitizeInput($movie['title']); ?>
-        (<?php echo sanitizeInput($movie['genre']); ?>) -
-        <?php echo (int)$movie['duration']; ?> min,
-        Rating: <?php echo sanitizeInput($movie['rating']); ?>
-    </p>
+                <p class="small-muted">
+                    <?php echo sanitizeInput($movie['title']); ?>
+                    (<?php echo sanitizeInput($movie['genre']); ?>) -
+                    <?php echo (int)$movie['duration']; ?> min,
+                    Rating: <?php echo sanitizeInput($movie['rating']); ?>
+                </p>
 
-    <p><?php echo sanitizeInput($movie['description']); ?></p>
+                <p><?php echo sanitizeInput($movie['description']); ?></p>
 
-    <p><strong>Genre:</strong> <?php echo sanitizeInput($movie['genre']); ?></p>
-    <p><strong>Duration:</strong> <?php echo (int)$movie['duration']; ?> min</p>
-    <p><strong>Rating:</strong> <?php echo sanitizeInput($movie['rating']); ?> / 10</p>
-    <p><strong>Age Rating:</strong> <?php echo sanitizeInput($movie['age_rating']); ?></p>
-    <p><strong>Director:</strong> <?php echo sanitizeInput($movie['director']); ?></p>
-    <p><strong>Release Date:</strong> <?php echo sanitizeInput($movie['release_date']); ?></p>
-    <p><strong>Price:</strong> <?php echo formatPrice($movie['price']); ?></p>
-    <p><strong>Cast:</strong> <?php echo sanitizeInput(implode(', ', $movie['cast'])); ?></p>
+                <p><strong>Genre:</strong> <?php echo sanitizeInput($movie['genre']); ?></p>
+                <p><strong>Duration:</strong> <?php echo (int)$movie['duration']; ?> min</p>
+                <p><strong>Rating:</strong> <?php echo sanitizeInput($movie['rating']); ?> / 10</p>
+                <p><strong>Age Rating:</strong> <?php echo sanitizeInput($movie['age_rating']); ?></p>
+                <p><strong>Director:</strong> <?php echo sanitizeInput($movie['director']); ?></p>
+                <p><strong>Release Date:</strong> <?php echo sanitizeInput($movie['release_date']); ?></p>
+                <p><strong>Price:</strong> <?php echo formatPrice($movie['price']); ?></p>
+                <p><strong>Cast:</strong> <?php echo sanitizeInput(implode(', ', $movie['cast'])); ?></p>
 
-    <div class="showtimes">
-        <h3>Showtimes</h3>
-        <?php foreach ($movie['showtimes'] as $time): ?>
-            <span><?php echo sanitizeInput($time); ?></span>
-        <?php endforeach; ?>
-    </div>
+                <div class="showtimes">
+                    <h3>Showtimes</h3>
+                    <?php foreach ($movie['showtimes'] as $time): ?>
+                        <span><?php echo sanitizeInput($time); ?></span>
+                    <?php endforeach; ?>
+                </div>
 
-    <a class="btn btn-primary" href="booking.php?movie_id=<?php echo (int)$movie['id']; ?>">
-        Reserve Tickets
-    </a>
-</div>
+                <a class="btn btn-primary" href="booking.php?movie_id=<?php echo (int)$movie['id']; ?>">
+                    Reserve Tickets
+                </a>
+            </div>
         </section>
     </main>
     <footer class="site-footer">
