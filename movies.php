@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__ . "/Classes/Movie.php";
+
+$oopMovies = [
+    new Movie(1, "The Super Mario Galaxy Movie", "Animation", 98, 7.1, 5.50),
+    new Movie(2, "Project Hail Mary", "Sci-Fi", 156, 8.0, 6.50),
+    new Movie(3, "Hoppers", "Animation", 104, 7.3, 5.00)
+];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
