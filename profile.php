@@ -1,8 +1,19 @@
 <?php
 include 'includes/auth.php';
-requireLogin(); // Ensure the user is logged in
+requireLogin();
 
-// If logged in, load the profile UI:
+require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/includes/data.php';
+
+$lastMovieTitle = "No movie viewed yet";
+
+if (!empty($_COOKIE['last_movie_id'])) {
+    $lastMovie = getMovieById($movies, (int)$_COOKIE['last_movie_id']);
+
+    if ($lastMovie) {
+        $lastMovieTitle = $lastMovie['title'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +35,6 @@ requireLogin(); // Ensure the user is logged in
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
         <?php include 'nav.php'; ?>
-    </div>
-</header>
-</div>
     </div>
 </header>
 <main class="container">
@@ -54,7 +62,7 @@ requireLogin(); // Ensure the user is logged in
     </section>
     <section class="glass panel-card recent-activity-card">
         <h2>Recent Activity</h2>
-        <p><strong>Last viewed movie:</strong> The Super Mario Galaxy Movie</p>
+        <p><strong>Last viewed movie:</strong> <?php echo sanitizeInput($lastMovieTitle); ?></p>
         <p>No confirmed booking yet.</p>
     </section>
 </main>
