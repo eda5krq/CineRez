@@ -1,44 +1,92 @@
 <?php
-
 class Booking
 {
-    private $movieTitle;
-    private $customerName;
-    private $email;
-    private $phone;
-    private $tickets;
+    private $movieId;
+    private $userName;
+    private $seats;
+    private $date;
+    private $time;
+    private $totalPrice;
 
-    public function __construct($movieTitle, $customerName, $email, $phone, $tickets)
+    public function __construct($movieId, $userName, $seats, $date, $time, $totalPrice)
     {
-        $this->movieTitle = $movieTitle;
-        $this->customerName = $customerName;
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->tickets = $tickets;
+        $this->movieId = $movieId;
+        $this->userName = $userName;
+        $this->seats = $seats;
+        $this->date = $date;
+        $this->time = $time;
+        $this->totalPrice = $totalPrice;
     }
 
-    public function getMovieTitle()
+    public function getMovieId()
     {
-        return $this->movieTitle;
+        return $this->movieId;
     }
 
-    public function getCustomerName()
+    public function setMovieId($movieId)
     {
-        return $this->customerName;
+        $this->movieId = $movieId;
     }
 
-    public function getEmail()
+    public function getUserName()
     {
-        return $this->email;
+        return $this->userName;
     }
 
-    public function getPhone()
+    public function setUserName($userName)
     {
-        return $this->phone;
+        $this->userName = $userName;
     }
 
-    public function getTickets()
+    public function getSeats()
     {
-        return $this->tickets;
+        return $this->seats;
+    }
+
+    public function setSeats($seats)
+    {
+        $this->seats = $seats;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+    }
+
+    public function generateReservationCode()
+    {
+        return 'CRZ-' . date('Y') . '-' . random_int(1000, 9999);
+    }
+
+    public function getBookingSummary()
+    {
+        $seatsText = is_array($this->seats) ? implode(', ', $this->seats) : $this->seats;
+        return 'Movie ID: ' . $this->movieId . ' | Name: ' . $this->userName . ' | Seats: ' . $seatsText .
+            ' | Date: ' . $this->date . ' | Time: ' . $this->time . ' | Total: EUR ' . number_format($this->totalPrice, 2);
     }
 }
