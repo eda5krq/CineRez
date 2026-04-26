@@ -1,25 +1,35 @@
 <?php
 session_start();
-include 'includes/users.php';
+
+require 'includes/users.php'; 
 
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["Username"];
-    $password = $_POST["password"];
+    $email = trim($_POST["email"] ?? '');
+    $password = trim($_POST["password"] ?? '');
+
+    $loggedIn = false;
 
     foreach ($users as $user) {
-        if ($user["username"] === $username && $user["password"] === $password) {
-
-            $_SESSION["username"] = $user["username"];
+        if ($user["email"] === $email && $user["password"] === $password) {
+            
+            $_SESSION["email"] = $user["email"];
             $_SESSION["role"] = $user["role"];
-
-            header("Location: index.php");
-            exit();
+            $_SESSION['username'] = $user['username']; 
+            $_SESSION['full_name'] = $user['full_name'];
+            
+            $loggedIn = true;
+            break; 
         }
     }
 
-    $error = "Invalid credentials!";
+    if ($loggedIn) {
+        header("Location: index.php");
+        exit();
+    } else {
+        $error = "Invalid credentials!";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -45,11 +55,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="glass auth-card">
         <h1>Login</h1>
         <p>Use demo credentials for user or admin.</p>
+        
+        <?php if ($error): ?>
+            <div class="alert error" style="color: #ff4d4d; margin-bottom: 15px;">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+
         <form method="post" action="login.php" class="stack-form">
-            <label>Email</label><input type="email" name="Username" required>
-            <label>Password</label><input type="password" name="password" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            
+            <label>Password</label>
+            <input type="password" name="password" required>
+            
             <button class="btn btn-primary" type="submit">Login</button>
         </form>
+        
         <div class="demo-box">
             <p><strong>User:</strong> user@cinerez.com / User123</p>
             <p><strong>Admin:</strong> admin@cinerez.com / Admin123</p>

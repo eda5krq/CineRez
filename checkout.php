@@ -12,7 +12,7 @@
 <div class="background-overlay"></div>
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
         <?php include 'nav.php'; ?>
     </div>

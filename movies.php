@@ -1,4 +1,7 @@
 <?php
+// 1. MUST start the session at the very top before any HTML!
+session_start();
+
 require_once __DIR__ . '/Classes/Movie.php';
 require_once __DIR__ . '/includes/functions.php';
 
@@ -67,73 +70,64 @@ if ($sort === "title") {
     });
 }
 
-
-
 $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CineRez | Movies</title>
+    <title>Movies | CineRez</title>
     <link rel="stylesheet" href="css/style.css" />
+    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
+<div class="background-overlay"></div>
 
-<header class="header">
-    <div class="container navbar">
-        <a class="logo" href="index.php">Cine<span>Rez</span></a>
-
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>
-            &#9776;
-        </button>
-
-        <ul class="nav-menu" data-nav-menu>
-            <li><a class="nav-link" href="index.php">Home</a></li>
-            <li><a class="nav-link" href="movies.php">Movies</a></li>
-            <li><a class="nav-link" href="booking.php">Booking</a></li>
-            <li><a class="nav-link" href="contact.php">Contact</a></li>
-            <li><a class="nav-link" href="login.php">Login</a></li>
-        </ul>
+<header class="site-header glass">
+    <div class="container nav-wrap">
+        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
+        <?php include 'nav.php'; ?>
     </div>
 </header>
 
 <main>
     <section class="page-hero">
         <div class="container">
-            <h1>Browse Movies</h1>
-            <p class="section-subtitle">Find your next watch and reserve seats instantly.</p>
+            <h1 style="color: white; margin-bottom: 10px;">Browse Movies</h1>
+            <p class="section-subtitle" style="color: #ccc;">Find your next watch and reserve seats instantly.</p>
         </div>
     </section>
 
     <section class="section" style="padding-top: 1rem;">
         <div class="container">
-            <form method="get" action="movies.php" class="filter-bar">
+            <form method="get" action="movies.php" class="filter-bar glass" style="padding: 15px; margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
                 <input
                     class="search-input"
                     type="search"
                     name="search"
                     placeholder="Search by movie title..."
-                    value="<?php echo sanitizeInput($search); ?>"
+                    value="<?php echo htmlspecialchars($search); ?>"
+                    style="flex-grow: 1; padding: 10px;"
                 />
 
-                <div class="filter-buttons">
+                <div class="filter-buttons" style="display: flex; gap: 5px;">
                     <?php foreach ($genres as $genreOption): ?>
                         <button
-                            class="filter-btn <?php echo $genre === $genreOption ? 'active' : ''; ?>"
+                            class="filter-btn btn <?php echo $genre === $genreOption ? 'btn-primary' : 'btn-outline'; ?>"
                             type="submit"
                             name="genre"
-                            value="<?php echo sanitizeInput($genreOption); ?>"
+                            value="<?php echo htmlspecialchars($genreOption); ?>"
                         >
-                            <?php echo sanitizeInput($genreOption); ?>
+                            <?php echo htmlspecialchars($genreOption); ?>
                         </button>
                     <?php endforeach; ?>
                 </div>
 
-                <select name="sort" class="search-input">
-                    <option value="">Sort</option>
+                <select name="sort" class="search-input" style="padding: 10px;">
+                    <option value="">Sort By</option>
                     <option value="title" <?php echo $sort === "title" ? "selected" : ""; ?>>Title A-Z</option>
                     <option value="rating" <?php echo $sort === "rating" ? "selected" : ""; ?>>Top Rating</option>
                     <option value="price" <?php echo $sort === "price" ? "selected" : ""; ?>>Lowest Price</option>
@@ -144,9 +138,11 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
             </form>
 
             <?php if (empty($filteredMovies)): ?>
-                <p class="empty-state">No movies found. Try another search or filter.</p>
+                <div class="glass" style="padding: 30px; text-align: center; color: white;">
+                    <p class="empty-state">No movies found. Try another search or filter.</p>
+                </div>
             <?php else: ?>
-                <div class="card-grid">
+                <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
                     <?php foreach ($filteredMovies as $movieItem): ?>
                         <?php
                         $movie = $movieItem["object"];
@@ -154,42 +150,35 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
                         $ageRating = $movieItem["ageRating"];
                         ?>
 
-                        <article class="movie-card">
-                            <div class="poster-placeholder">
+                        <article class="movie-card glass" style="padding: 15px; display: flex; flex-direction: column;">
+                            <div class="poster-placeholder" style="margin-bottom: 15px; text-align: center;">
                                 <img
-                                    src="images/<?php echo sanitizeInput($poster); ?>"
-                                    alt="<?php echo sanitizeInput($movie->getTitle()); ?> poster"
+                                    src="images/<?php echo htmlspecialchars($poster); ?>"
+                                    alt="<?php echo htmlspecialchars($movie->getTitle()); ?> poster"
+                                    style="max-width: 100%; border-radius: 8px;"
+                                    onerror="this.src='images/placeholder.png';"
                                 />
                             </div>
 
-                            <h3><?php echo sanitizeInput($movie->getTitle()); ?></h3>
+                            <h3 style="color: white; margin-bottom: 10px; font-size: 1.2rem;"><?php echo htmlspecialchars($movie->getTitle()); ?></h3>
 
-                            <p>
-                                <?php echo sanitizeInput($movie->getGenre()); ?>
-                                |
-                                <?php echo (int) $movie->getDuration(); ?> min
+                            <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 5px;">
+                                <?php echo htmlspecialchars($movie->getGenre()); ?> | <?php echo (int) $movie->getDuration(); ?> min
                             </p>
 
-                            <p class="rating">
-                                Rating: <?php echo sanitizeInput($movie->getRating()); ?>
-                                |
-                                <?php echo sanitizeInput($ageRating); ?>
+                            <p class="rating" style="color: #ffc107; font-size: 0.9rem; margin-bottom: 5px;">
+                                ★ <?php echo htmlspecialchars($movie->getRating()); ?> | <?php echo htmlspecialchars($ageRating); ?>
                             </p>
 
-                            <p class="price">
+                            <p class="price" style="color: white; font-weight: bold; margin-bottom: 15px;">
                                 <?php echo formatPrice($movie->getPrice()); ?>
                             </p>
 
-                            <p class="small-note">
-                                <?php echo sanitizeInput($movie->getShortInfo()); ?>
-                            </p>
-
-                            <div class="card-actions">
-                                <a class="btn btn-sm" href="movie-details.php?id=<?php echo (int) $movie->getId(); ?>">
-                                    View Details
+                            <div class="card-actions" style="margin-top: auto; display: flex; gap: 10px;">
+                                <a class="btn btn-sm btn-outline" href="movie-details.php?id=<?php echo (int) $movie->getId(); ?>" style="flex: 1; text-align: center;">
+                                    Details
                                 </a>
-
-                                <a class="btn btn-sm btn-outline" href="booking.php?movie_id=<?php echo (int) $movie->getId(); ?>">
+                                <a class="btn btn-sm btn-primary" href="booking.php?movie_id=<?php echo (int) $movie->getId(); ?>" style="flex: 1; text-align: center;">
                                     Book
                                 </a>
                             </div>
@@ -199,52 +188,13 @@ $genres = ["All", "Animation", "Drama", "Horror", "Romance", "Sci-Fi"];
             <?php endif; ?>
         </div>
     </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="glass">
-                <h2>OOP Movie Class Demo</h2>
-                <p>
-                    This page uses the <strong>Movie</strong> class.
-                    Each movie is created as a PHP object with <code>new Movie(...)</code>
-                    and displayed using getter methods.
-                </p>
-            </div>
-        </div>
-    </section>
 </main>
 
-<footer class="footer">
-    <div class="container footer-grid">
-        <div>
-            <a class="logo" href="index.php">Cine<span>Rez</span></a>
-            <p class="small-note">Discover every genre in one place.</p>
-        </div>
-
-        <div>
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="booking.php">Booking</a></li>
-                <li><a href="contact.php">Contact</a></li>
-            </ul>
-        </div>
-
-        <div>
-            <h4>Social</h4>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">YouTube</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container footer-bottom">
-        &copy; 2026 CineRez. All rights reserved.
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>&copy; 2026 CineRez. All rights reserved.</p>
+        <p>Frontend-only static demo version.</p>
     </div>
 </footer>
-
-<script src="js/main.js"></script>
 </body>
 </html>

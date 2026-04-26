@@ -1,24 +1,19 @@
 <?php
-// 1. Initialize variables so they exist even if the form isn't sent
 $registrationSuccess = false;
 $error = '';
 $fullName = ''; 
 
-// 2. ONLY run this code if the Request Method is POST (the user clicked submit)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Now these keys will exist because the form was sent!
     $fullName = $_POST['full_name'];
     $email    = $_POST['email'];
     $phone    = $_POST['phone'];
     $pass     = $_POST['password'];
     $confirm  = $_POST['confirm_password'];
 
-    // 3. Simple Validation
     if ($pass !== $confirm) {
         $error = "Passwords do not match!";
     } else {
-        // Success logic goes here
         $registrationSuccess = true;
     }
 }
@@ -61,8 +56,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php if (!$registrationSuccess): ?>
         <form method="post" action="register.php" class="stack-form">
-            <button class="btn btn-primary" type="submit">Register</button>
-        </form>
+    <label for="full_name">Full Name</label>
+    <input type="text" id="full_name" name="full_name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
     <?php endif; ?>
 </section>
 </main>

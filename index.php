@@ -29,7 +29,7 @@
             <p>Choose a movie, pick your seats, and reserve your ticket online.</p>
             <div class="hero-actions">
                 <a class="btn btn-primary" href="movies.php">Browse Movies</a>
-                <a class="btn btn-secondary" href="movies.html">Book Now</a>
+                <a class="btn btn-secondary" href="movies.php">Book Now</a>
             </div>
             <p class="small-muted">Preferred cinema: Prishtina</p>
         </div>
@@ -39,7 +39,7 @@
     <section>
         <div class="section-head">
             <h2>Featured Movies</h2>
-            <a href="movies.html">See all</a>
+            <a href="movies.php">See all</a>
         </div>
         <div class="movie-grid">
             <article class="movie-card glass">
@@ -49,8 +49,8 @@
                 <p class="rating">Rating: 7.1 | PG</p>
                 <p class="price">EUR 6.00</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
             <article class="movie-card glass">
@@ -60,8 +60,8 @@
                 <p class="rating">Rating: 8.0 | PG-13</p>
                 <p class="price">EUR 6.00</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
             <article class="movie-card glass">
@@ -71,8 +71,8 @@
                 <p class="rating">Rating: 7.3 | PG</p>
                 <p class="price">EUR 6.50</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
         </div>
