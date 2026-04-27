@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | CineRez</title>
+    <link rel="stylesheet" href="css/style.css">
+    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<div class="background-overlay"></div>
+<header class="site-header glass">
+    <div class="container nav-wrap">
+        <a class="logo" href="index.html"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
+        <nav id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+            <a href="profile.html">Profile</a>
+            <a class="active" href="admin.html">Admin</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+</header>
+<main class="container">
+    <section class="glass page-head">
+        <h1>Admin Dashboard</h1>
+        <p>Admin panel active. You can monitor reservations and manage cinema operations.</p>
+        <p>Logged in as: <strong>Admin</strong> (admin@cinerez.com)</p>
+    </section>
+    <section class="stats-grid">
+        <article class="glass stat-card"><h3>Total Movies</h3><p>8</p></article>
+        <article class="glass stat-card"><h3>Total Reservations</h3><p>4</p></article>
+        <article class="glass stat-card"><h3>Total Revenue</h3><p>EUR 42.50</p></article>
+        <article class="glass stat-card"><h3>Can Manage Movies</h3><p>Yes</p></article>
+    </section>
+    <section class="glass panel-card dashboard-table-card">
+        <h2>Reservations</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Code</th><th>Customer</th><th>Movie</th><th>Seats</th><th>Total</th></tr></thead>
+                <tbody>
+                <tr><td>CRZ-2026-1201</td><td>Arta H.</td><td>Project Hail Mary</td><td>B2, B3</td><td>EUR 12.00</td></tr>
+                <tr><td>CRZ-2026-1202</td><td>Erion P.</td><td>Hoppers</td><td>D4, D5, D6</td><td>EUR 16.50</td></tr>
+                <tr><td>CRZ-2026-1203</td><td>Lena K.</td><td>The Super Mario Galaxy Movie</td><td>F7</td><td>EUR 5.00</td></tr>
+                <tr><td>CRZ-2026-1204</td><td>Besa M.</td><td>A Great Awakening</td><td>C1, C2</td><td>EUR 9.00</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
+</body>
+</html>
