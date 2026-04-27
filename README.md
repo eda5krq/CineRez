@@ -19,7 +19,7 @@ No database is used in this phase; all data is static/dummy.
 - Reusable includes for header, footer and navigation
 
 ---
-
+Për ta ekzekutuar projektin CineRez, vendoseni folderin e projektit brenda XAMPP htdocs, p.sh. C:\xampp_new\htdocs\CineRez. Pastaj startoni Apache nga XAMPP Control Panel dhe hapeni projektin në browser me http://localhost/CineRez/. Faqet mund të testohen veçmas, p.sh. http://localhost/CineRez/movies.php, http://localhost/CineRez/login.php ose http://localhost/CineRez/admin.php.
 ## Project Structure
 
 ```text
