@@ -13,21 +13,12 @@
 
 <header class="site-header glass">
     <div class="container nav-wrap">
-        <a class="logo" href="index.html" aria-label="CineRez home">
+        <a class="logo" href="index.php" aria-label="CineRez home">
             <img src="images/cinerez-logo.svg" alt="CineRez logo">
             <span>CineRez</span>
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <nav id="mainNav">
-            <a class="active" href="index.html">Home</a>
-            <a href="movies.html">Movies</a>
-            <a href="booking.html">Booking</a>
-            <a href="contact.html">Contact</a>
-            <a href="profile.html">Profile</a>
-            <a href="admin.html">Admin</a>
-            <a href="login.html">Logout</a>
-        </nav>
-    </div>
+       <?php include 'nav.php'; ?>
 </header>
 
 <main class="container">
@@ -37,8 +28,8 @@
             <h1>Book Your Cinema Experience with CineRez</h1>
             <p>Choose a movie, pick your seats, and reserve your ticket online.</p>
             <div class="hero-actions">
-                <a class="btn btn-primary" href="movies.html">Browse Movies</a>
-                <a class="btn btn-secondary" href="movies.html">Book Now</a>
+                <a class="btn btn-primary" href="movies.php">Browse Movies</a>
+                <a class="btn btn-secondary" href="movies.php">Book Now</a>
             </div>
             <p class="small-muted">Preferred cinema: Prishtina</p>
         </div>
@@ -48,7 +39,7 @@
     <section>
         <div class="section-head">
             <h2>Featured Movies</h2>
-            <a href="movies.html">See all</a>
+            <a href="movies.php">See all</a>
         </div>
         <div class="movie-grid">
             <article class="movie-card glass">
@@ -58,8 +49,8 @@
                 <p class="rating">Rating: 7.1 | PG</p>
                 <p class="price">EUR 6.00</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
             <article class="movie-card glass">
@@ -69,8 +60,8 @@
                 <p class="rating">Rating: 8.0 | PG-13</p>
                 <p class="price">EUR 6.00</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
             <article class="movie-card glass">
@@ -80,8 +71,8 @@
                 <p class="rating">Rating: 7.3 | PG</p>
                 <p class="price">EUR 6.50</p>
                 <div class="card-actions">
-                    <a class="btn btn-sm" href="movie-details.html">View Details</a>
-                    <a class="btn btn-sm btn-outline" href="booking.html">Book</a>
+                    <a class="btn btn-sm" href="movie-details.php">View Details</a>
+                    <a class="btn btn-sm btn-outline" href="booking.php">Book</a>
                 </div>
             </article>
         </div>
