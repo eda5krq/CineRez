@@ -557,15 +557,27 @@ option {
 
 .showtimes {
     display: flex;
-    gap: 8px;
+    align-items: center;
     flex-wrap: wrap;
-    margin: 8px 0 14px;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.showtimes h3 {
+    margin: 0;
+    margin-right: 8px;
+    font-size: 28px;
 }
 
 .showtimes span {
-    border: 1px solid var(--border);
-    padding: 8px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    padding: 12px 18px;
     border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 20px;
 }
 
 .booking-layout {
