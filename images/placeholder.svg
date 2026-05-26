@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title desc">
+  <title id="title">CineRez poster placeholder</title>
+  <desc id="desc">A fallback poster image for movies without a poster file.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff2e88"/>
+      <stop offset="0.52" stop-color="#7c3cff"/>
+      <stop offset="1" stop-color="#27d7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="#0b0620"/>
+  <rect x="22" y="22" width="356" height="556" rx="28" fill="url(#bg)" opacity="0.28"/>
+  <rect x="54" y="76" width="292" height="448" rx="22" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="4"/>
+  <circle cx="200" cy="234" r="62" fill="#ffffff" opacity="0.16"/>
+  <path d="M178 198v72l62-36-62-36z" fill="#ffffff" opacity="0.82"/>
+  <text x="200" y="360" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">CineRez</text>
+  <text x="200" y="402" text-anchor="middle" fill="#dcd7ff" font-family="Arial, Helvetica, sans-serif" font-size="18">Poster unavailable</text>
+</svg>
