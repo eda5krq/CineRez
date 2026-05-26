@@ -1,52 +1,66 @@
 # CineRez
 
-CineRez is a web application for movie and ticket reservations.  
-In Phase 1, the project focuses on PHP basics, OOP, RegEx, Sessions and Cookies.  
-No database is used in this phase; all data is static/dummy.
+CineRez is a PHP/MySQL cinema reservation app for local XAMPP, Laragon, or WAMP development.
 
----
-
-## Phase 1 Requirements
-
-- Static login/logout system
-- User state handled with PHP sessions
-- Two roles: `admin` and `user`
-- OOP with domain classes
-- RegEx server-side validation
-- Cookies for personalization
-- Dummy movie data using PHP arrays
-- Movie sorting
-- Reusable includes for header, footer and navigation
-
----
-Për ta ekzekutuar projektin CineRez, vendoseni folderin e projektit brenda XAMPP htdocs, p.sh. C:\xampp_new\htdocs\CineRez. Pastaj startoni Apache nga XAMPP Control Panel dhe hapeni projektin në browser me http://localhost/CineRez/. Faqet mund të testohen veçmas, p.sh. http://localhost/CineRez/movies.php, http://localhost/CineRez/login.php ose http://localhost/CineRez/admin.php.
-## Project Structure
+## Local URL
 
 ```text
-CineRez/
-├── index.php
-├── movies.php
-├── booking.php
-├── login.php
-├── logout.php
-├── dashboard.php
-│
-├── includes/
-│   ├── header.php
-│   ├── footer.php
-│   ├── nav.php
-│   ├── auth.php
-│   ├── users.php
-│   ├── data.php
-│   └── validation.php
-│
-├── classes/
-│   ├── Movie.php
-│   ├── User.php
-│   ├── Admin.php
-│   └── Booking.php
-│
-└── assets/
-    ├── css/
-    ├── js/
-    └── images/
+http://localhost/CineRez_repo/CineRez/
+```
+
+The repository root is the project root. Do not place the app inside a nested `cinerez` folder.
+
+## Database
+
+Database name:
+
+```text
+cinerez_db
+```
+
+Import the schema from:
+
+```text
+database/schema.sql
+```
+
+The schema creates:
+
+- `users`
+- `movies`
+- `reservations`
+- `contact_messages`
+
+It also inserts demo movies plus these accounts:
+
+```text
+Admin: admin@cinerez.local / Admin123
+User:  user@cinerez.local / User123
+```
+
+The current local test database uses `admin@cinerez.local / Admin123`.
+
+Re-importing `database/schema.sql` will drop and recreate the CineRez app tables
+(`users`, `movies`, `reservations`, `contact_messages`). That resets demo
+accounts, movies, reservations, and contact messages.
+
+## Setup With XAMPP
+
+1. Put this repo at `C:\xampp\htdocs\CineRez_repo\CineRez`.
+2. Start Apache and MySQL from XAMPP Control Panel.
+3. Open `http://localhost/phpmyadmin/`.
+4. Choose the Import tab.
+5. Select `C:\xampp\htdocs\CineRez_repo\CineRez\database\schema.sql`.
+6. Click Go.
+7. Visit `http://localhost/CineRez_repo/CineRez/`.
+
+## Main Features
+
+- PDO database connection with prepared statements.
+- Session authentication with user and admin roles.
+- Admin movie CRUD with poster upload to `uploads/`.
+- Public movie list and movie details from MySQL.
+- User reservation create, read, update, and AJAX cancel.
+- Contact messages saved to MySQL.
+- Contact email fallback log at `logs/contact_emails.log` when local mail is not configured.
+- Admin TVMaze API search without saving external results locally.

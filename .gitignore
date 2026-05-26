@@ -1,2 +1,6 @@
 .vscode/
 *.zip
+logs/*.log
+!logs/.gitkeep
+uploads/*
+!uploads/.gitkeep
