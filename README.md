@@ -23,6 +23,7 @@ Për ta ekzekutuar projektin CineRez, vendoseni folderin e projektit brenda XAMP
 ## Project Structure
 
 
+```text
 CineRez/
 ├── index.php
 ├── movies.php
@@ -50,6 +51,7 @@ CineRez/
     ├── css/
     ├── js/
     └── images/
+```
 
 # CineRez - Faza 2
 
@@ -82,7 +84,7 @@ Qëllimi i Fazës 2 është zgjerimi i projektit me:
 - phpMyAdmin
 
 ## Struktura e projekti
-
+```text
 CineRez/
 │
 ├── admin/
