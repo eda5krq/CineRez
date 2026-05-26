@@ -1,83 +1,43 @@
 <?php
-session_start();
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/validation.php';
 
-require 'includes/users.php'; 
+$pageTitle = 'Login';
+$basePath = '';
+$errors = [];
+$email = trim($_POST['email'] ?? '');
 
-$error = "";
+if (isLoggedIn()) {
+    redirect('profile.php');
+}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST["email"] ?? '');
-    $password = trim($_POST["password"] ?? '');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $password = (string) ($_POST['password'] ?? '');
 
-    $loggedIn = false;
+    validateRequired($email, 'Email', $errors);
+    validateEmailAddress($email, $errors);
+    validateRequired($password, 'Password', $errors);
 
-    foreach ($users as $user) {
-        if ($user["email"] === $email && $user["password"] === $password) {
-            
-            $_SESSION["email"] = $user["email"];
-            $_SESSION["role"] = $user["role"];
-            $_SESSION['username'] = $user['username']; 
-            $_SESSION['full_name'] = $user['full_name'];
-            
-            $loggedIn = true;
-            break; 
+    if (empty($errors)) {
+        try {
+            $pdo = getPDO();
+            $statement = $pdo->prepare('SELECT id, name, email, password, role FROM users WHERE email = :email LIMIT 1');
+            $statement->execute(['email' => $email]);
+            $user = $statement->fetch();
+
+            if ($user && password_verify($password, $user['password'])) {
+                loginUser($user);
+                redirect($user['role'] === 'admin' ? 'admin/index.php' : 'profile.php');
+            }
+
+            $errors[] = 'Invalid email or password.';
+        } catch (Throwable $exception) {
+            $errors[] = $exception->getMessage();
         }
     }
-
-    if ($loggedIn) {
-        header("Location: index.php");
-        exit();
-    } else {
-        $error = "Invalid credentials!";
-    }
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | CineRez</title>
-    <link rel="stylesheet" href="css/style.css">
-    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
-    <script defer src="js/main.js"></script>
-</head>
-<body>
-<div class="background-overlay"></div>
-<header class="site-header glass">
-    <div class="container nav-wrap">
-        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-       <?php include 'nav.php'; ?>
-    </div>
-</header>
-<main class="container">
-    <section class="glass auth-card">
-        <h1>Login</h1>
-        <p>Use demo credentials for user or admin.</p>
-        
-        <?php if ($error): ?>
-            <div class="alert error" style="color: #ff4d4d; margin-bottom: 15px;">
-                <?php echo $error; ?>
-            </div>
-        <?php endif; ?>
 
-        <form method="post" action="login.php" class="stack-form">
-            <label>Email</label>
-            <input type="email" name="email" required>
-            
-            <label>Password</label>
-            <input type="password" name="password" required>
-            
-            <button class="btn btn-primary" type="submit">Login</button>
-        </form>
-        
-        <div class="demo-box">
-            <p><strong>User:</strong> user@cinerez.com / User123</p>
-            <p><strong>Admin:</strong> admin@cinerez.com / Admin123</p>
-        </div>
-    </section>
-</main>
-<footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
-</body>
-</html>
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/views/auth/login-form.php';
+include __DIR__ . '/includes/footer.php';
