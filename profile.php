@@ -1,71 +1,68 @@
 <?php
-include 'includes/auth.php';
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/auth.php';
+
 requireLogin();
 
-require_once __DIR__ . '/includes/functions.php';
-require_once __DIR__ . '/includes/data.php';
+$pageTitle = 'Profile';
+$basePath = '';
+$reservations = [];
+$lastMovieTitle = 'No movie viewed yet';
+$dbError = '';
 
-$lastMovieTitle = "No movie viewed yet";
+try {
+    $pdo = getPDO();
 
-if (!empty($_COOKIE['last_movie_id'])) {
-    $lastMovie = getMovieById($movies, (int)$_COOKIE['last_movie_id']);
-
-    if ($lastMovie) {
-        $lastMovieTitle = $lastMovie['title'];
+    if (!empty($_COOKIE['last_movie_id'])) {
+        $movieStatement = $pdo->prepare('SELECT title FROM movies WHERE id = :id');
+        $movieStatement->execute(['id' => (int) $_COOKIE['last_movie_id']]);
+        $lastMovie = $movieStatement->fetch();
+        if ($lastMovie) {
+            $lastMovieTitle = $lastMovie['title'];
+        }
     }
+
+    $reservationStatement = $pdo->prepare(
+        'SELECT r.id, r.reservation_date, r.seats, r.status, r.created_at, m.title
+         FROM reservations r
+         INNER JOIN movies m ON m.id = r.movie_id
+         WHERE r.user_id = :user_id
+         ORDER BY r.created_at DESC'
+    );
+    $reservationStatement->execute(['user_id' => currentUserId()]);
+    $reservations = $reservationStatement->fetchAll();
+} catch (Throwable $exception) {
+    $dbError = $exception->getMessage();
 }
+
+include __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | CineRez</title>
-    <link rel="stylesheet" href="css/style.css">
-    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
-    <script defer src="js/main.js"></script>
-</head>
-<body>
-<div class="background-overlay"></div>
-<header class="site-header glass">
-    <div class="container nav-wrap">
-        <a class="logo" href="index.php">
-            <img src="images/cinerez-logo.svg" alt="CineRez logo">
-            <span>CineRez</span>
-        </a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <?php include 'nav.php'; ?>
-    </div>
-</header>
+
 <main class="container">
     <section class="glass page-head">
         <h1>Profile</h1>
-        <p>Welcome back, <?php echo htmlspecialchars($_SESSION["username"]); ?>. You can browse movies and reserve tickets.</p>
+        <p>Welcome back, <?php echo e($_SESSION['user_name'] ?? 'Guest'); ?>. You can browse movies and manage reservations.</p>
     </section>
+
+    <?php if ($dbError !== ''): ?>
+        <div class="alert error"><?php echo e($dbError); ?></div>
+    <?php endif; ?>
+
     <section class="profile-grid">
         <article class="glass">
             <h2>Account</h2>
-            <p><strong>Name:</strong> <?php echo htmlspecialchars($_SESSION["username"]); ?></p>
-            <p><strong>Role:</strong> <?php echo htmlspecialchars(ucfirst($_SESSION["role"])); ?></p>
+            <p><strong>Name:</strong> <?php echo e($_SESSION['user_name'] ?? ''); ?></p>
+            <p><strong>Email:</strong> <?php echo e($_SESSION['user_email'] ?? ''); ?></p>
+            <p><strong>Role:</strong> <?php echo e(ucfirst($_SESSION['user_role'] ?? 'user')); ?></p>
         </article>
         <article class="glass">
-            <h2>Preferences</h2>
-            <form method="post" action="#" class="stack-form" data-static-demo="true">
-                <label>Preferred cinema location</label>
-                <select name="preferred_location">
-                    <option selected>Prishtina</option><option>Prizren</option><option>Peja</option><option>Gjilan</option>
-                </select>
-                <button class="btn btn-primary" type="submit">Save Preference</button>
-            </form>
-            <p><strong>Current:</strong> Prishtina</p>
+            <h2>Recent Activity</h2>
+            <p><strong>Last viewed movie:</strong> <?php echo e($lastMovieTitle); ?></p>
+            <a class="btn btn-outline" href="movies.php">Browse more movies</a>
         </article>
     </section>
-    <section class="glass panel-card recent-activity-card">
-        <h2>Recent Activity</h2>
-        <p><strong>Last viewed movie:</strong> <?php echo sanitizeInput($lastMovieTitle); ?></p>
-        <p>No confirmed booking yet.</p>
-    </section>
+
+    <?php include __DIR__ . '/views/reservations/profile-table.php'; ?>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
-</body>
-</html>
+
+<?php include __DIR__ . '/includes/footer.php'; ?>
