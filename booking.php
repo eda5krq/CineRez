@@ -1,69 +1,87 @@
 <?php
-include 'includes/auth.php';
-requireLogin();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking | CineRez</title>
-    <link rel="stylesheet" href="css/style.css">
-    <noscript><style>body{opacity:1!important;transform:none!important;}</style></noscript>
-    <script defer src="js/main.js"></script>
-</head>
-<body>
-<div class="background-overlay"></div>
-<header class="site-header glass">
-    <div class="container nav-wrap">
-        <a class="logo" href="index.php"><img src="images/cinerez-logo.svg" alt="CineRez logo"><span>CineRez</span></a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">Menu</button>
-        <?php include 'nav.php'; ?>
-    </div>
-</header>
-<main class="container">
-    <section class="glass page-head">
-        <h1>Reserve Seats</h1>
-        <p>The Super Mario Galaxy Movie | EUR 6.00</p>
-    </section>
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/auth.php';
 
-    <section class="booking-layout">
-        <form class="glass stack-form" method="get" action="checkout.php" id="bookingForm" data-adult-price="5" data-student-price="3.5" data-child-price="2.5">
-            <input type="hidden" name="movie_id" value="1">
-            <input type="hidden" name="selected_seats" id="selectedSeats" value="">
-            <label>Date</label>
-            <input type="date" name="date" required>
-            <label>Time</label>
-            <select name="time" required>
-                <option value="">Select showtime</option>
-                <option>16:00</option><option>18:30</option><option>21:00</option>
-            </select>
-            <div class="ticket-grid">
-                <div><label>Adult Tickets (EUR 5.00)</label><input type="number" min="0" max="10" name="adult_tickets" id="adultTickets" value="0" required></div>
-                <div><label>Student Tickets (EUR 3.50)</label><input type="number" min="0" max="10" name="student_tickets" id="studentTickets" value="0" required></div>
-                <div><label>Child Tickets (EUR 2.50)</label><input type="number" min="0" max="10" name="child_tickets" id="childTickets" value="0" required></div>
-            </div>
-            <p class="small-muted">Selected seats: <span id="selectedSeatsPreview">None</span></p>
-            <p class="small-muted">Ticket total: <span id="ticketTotalPreview">EUR 0.00</span></p>
-            <button class="btn btn-primary" type="submit">Continue to Checkout</button>
-        </form>
-        <section class="glass seat-panel">
-            <h2>Choose Seats</h2>
-            <div class="screen-arc">Screen</div>
-            <div class="seat-map" id="seatMap">
-                <div class="seat-row"><span class="row-label">A</span><button type="button" class="seat available" data-seat="A1">1</button><button type="button" class="seat available" data-seat="A2">2</button><button type="button" class="seat occupied" data-seat="A3" disabled>3</button><button type="button" class="seat occupied" data-seat="A4" disabled>4</button><button type="button" class="seat available" data-seat="A5">5</button><button type="button" class="seat available" data-seat="A6">6</button><button type="button" class="seat available" data-seat="A7">7</button><button type="button" class="seat available" data-seat="A8">8</button><button type="button" class="seat available" data-seat="A9">9</button><button type="button" class="seat available" data-seat="A10">10</button></div>
-                <div class="seat-row"><span class="row-label">B</span><button type="button" class="seat available" data-seat="B1">1</button><button type="button" class="seat available" data-seat="B2">2</button><button type="button" class="seat available" data-seat="B3">3</button><button type="button" class="seat available" data-seat="B4">4</button><button type="button" class="seat occupied" data-seat="B5" disabled>5</button><button type="button" class="seat available" data-seat="B6">6</button><button type="button" class="seat available" data-seat="B7">7</button><button type="button" class="seat available" data-seat="B8">8</button><button type="button" class="seat available" data-seat="B9">9</button><button type="button" class="seat available" data-seat="B10">10</button></div>
-                <div class="seat-row"><span class="row-label">C</span><button type="button" class="seat available" data-seat="C1">1</button><button type="button" class="seat occupied" data-seat="C2" disabled>2</button><button type="button" class="seat available" data-seat="C3">3</button><button type="button" class="seat available" data-seat="C4">4</button><button type="button" class="seat available" data-seat="C5">5</button><button type="button" class="seat available" data-seat="C6">6</button><button type="button" class="seat available" data-seat="C7">7</button><button type="button" class="seat occupied" data-seat="C8" disabled>8</button><button type="button" class="seat available" data-seat="C9">9</button><button type="button" class="seat available" data-seat="C10">10</button></div>
-                <div class="seat-row"><span class="row-label">D</span><button type="button" class="seat available" data-seat="D1">1</button><button type="button" class="seat available" data-seat="D2">2</button><button type="button" class="seat available" data-seat="D3">3</button><button type="button" class="seat available" data-seat="D4">4</button><button type="button" class="seat available" data-seat="D5">5</button><button type="button" class="seat occupied" data-seat="D6" disabled>6</button><button type="button" class="seat available" data-seat="D7">7</button><button type="button" class="seat available" data-seat="D8">8</button><button type="button" class="seat available" data-seat="D9">9</button><button type="button" class="seat available" data-seat="D10">10</button></div>
-                <div class="seat-row"><span class="row-label">E</span><button type="button" class="seat occupied" data-seat="E1" disabled>1</button><button type="button" class="seat available" data-seat="E2">2</button><button type="button" class="seat available" data-seat="E3">3</button><button type="button" class="seat available" data-seat="E4">4</button><button type="button" class="seat available" data-seat="E5">5</button><button type="button" class="seat available" data-seat="E6">6</button><button type="button" class="seat available" data-seat="E7">7</button><button type="button" class="seat available" data-seat="E8">8</button><button type="button" class="seat available" data-seat="E9">9</button><button type="button" class="seat available" data-seat="E10">10</button></div>
-                <div class="seat-row"><span class="row-label">F</span><button type="button" class="seat available" data-seat="F1">1</button><button type="button" class="seat available" data-seat="F2">2</button><button type="button" class="seat available" data-seat="F3">3</button><button type="button" class="seat available" data-seat="F4">4</button><button type="button" class="seat available" data-seat="F5">5</button><button type="button" class="seat available" data-seat="F6">6</button><button type="button" class="seat available" data-seat="F7">7</button><button type="button" class="seat available" data-seat="F8">8</button><button type="button" class="seat occupied" data-seat="F9" disabled>9</button><button type="button" class="seat available" data-seat="F10">10</button></div>
-                <div class="seat-row"><span class="row-label">G</span><button type="button" class="seat available" data-seat="G1">1</button><button type="button" class="seat available" data-seat="G2">2</button><button type="button" class="seat available" data-seat="G3">3</button><button type="button" class="seat occupied" data-seat="G4" disabled>4</button><button type="button" class="seat available" data-seat="G5">5</button><button type="button" class="seat available" data-seat="G6">6</button><button type="button" class="seat available" data-seat="G7">7</button><button type="button" class="seat available" data-seat="G8">8</button><button type="button" class="seat available" data-seat="G9">9</button><button type="button" class="seat available" data-seat="G10">10</button></div>
-                <div class="seat-row"><span class="row-label">H</span><button type="button" class="seat available" data-seat="H1">1</button><button type="button" class="seat available" data-seat="H2">2</button><button type="button" class="seat available" data-seat="H3">3</button><button type="button" class="seat available" data-seat="H4">4</button><button type="button" class="seat available" data-seat="H5">5</button><button type="button" class="seat available" data-seat="H6">6</button><button type="button" class="seat occupied" data-seat="H7" disabled>7</button><button type="button" class="seat available" data-seat="H8">8</button><button type="button" class="seat available" data-seat="H9">9</button><button type="button" class="seat available" data-seat="H10">10</button></div>
-            </div>
-            <div class="legend"><span><i class="seat-dot available"></i> Available</span><span><i class="seat-dot occupied"></i> Reserved</span><span><i class="seat-dot selected"></i> Selected</span></div>
-        </section>
-    </section>
-</main>
-<footer class="site-footer"><div class="container footer-inner"><p>&copy; 2026 CineRez. All rights reserved.</p><p>Frontend-only static demo version.</p></div></footer>
-</body>
-</html>
+requireLogin();
+
+$pageTitle = 'Booking';
+$basePath = '';
+$errors = [];
+$showtimes = ['16:00', '18:30', '21:00'];
+$occupiedSeats = ['A3', 'A4', 'B5', 'C2', 'C8', 'D6', 'E1', 'F9', 'G4', 'H7'];
+$formData = $_POST;
+
+$movieId = filter_input(INPUT_POST, 'movie_id', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]])
+    ?: filter_input(INPUT_GET, 'movie_id', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]])
+    ?: 1;
+
+try {
+    $pdo = getPDO();
+    $statement = $pdo->prepare('SELECT id, title, description, genre, duration, release_year, poster FROM movies WHERE id = :id');
+    $statement->execute(['id' => $movieId]);
+    $movie = $statement->fetch();
+
+    if (!$movie) {
+        setFlash('error', 'Movie not found.');
+        redirect('movies.php');
+    }
+} catch (Throwable $exception) {
+    setFlash('error', $exception->getMessage());
+    redirect('movies.php');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $reservationDate = trim($_POST['reservation_date'] ?? '');
+    $showtime = trim($_POST['showtime'] ?? '');
+    $adultTickets = max(0, (int) ($_POST['adult_tickets'] ?? 0));
+    $studentTickets = max(0, (int) ($_POST['student_tickets'] ?? 0));
+    $childTickets = max(0, (int) ($_POST['child_tickets'] ?? 0));
+    $selectedSeats = trim($_POST['selected_seats'] ?? '');
+    $seatCodes = array_values(array_filter(array_map('trim', explode(',', $selectedSeats))));
+    $ticketCount = $adultTickets + $studentTickets + $childTickets;
+
+    if ($reservationDate === '') {
+        $errors[] = 'Reservation date is required.';
+    } elseif ($reservationDate < date('Y-m-d')) {
+        $errors[] = 'Reservation date cannot be in the past.';
+    }
+
+    if (!in_array($showtime, $showtimes, true)) {
+        $errors[] = 'Please choose a valid showtime.';
+    }
+
+    if ($ticketCount < 1) {
+        $errors[] = 'Choose at least one ticket.';
+    }
+
+    if (count($seatCodes) !== $ticketCount) {
+        $errors[] = 'Selected seats must match the number of tickets.';
+    }
+
+    foreach ($seatCodes as $seatCode) {
+        if (!preg_match('/^[A-H](10|[1-9])$/', $seatCode) || in_array($seatCode, $occupiedSeats, true)) {
+            $errors[] = 'One or more selected seats are invalid.';
+            break;
+        }
+    }
+
+    if (empty($errors)) {
+        $_SESSION['pending_reservation'] = [
+            'movie_id' => (int) $movie['id'],
+            'reservation_date' => $reservationDate,
+            'showtime' => $showtime,
+            'seat_codes' => $seatCodes,
+            'seats' => $ticketCount,
+            'adult_tickets' => $adultTickets,
+            'student_tickets' => $studentTickets,
+            'child_tickets' => $childTickets,
+            'total' => ($adultTickets * 5.00) + ($studentTickets * 3.50) + ($childTickets * 2.50),
+        ];
+
+        redirect('checkout.php');
+    }
+}
+
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/views/reservations/booking-form.php';
+include __DIR__ . '/includes/footer.php';
